@@ -11,6 +11,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/auth', require('./routes/authRoutes'));
+app.use('/api/products', require('./routes/productRoutes'));
+app.use('/api/inventory', require('./routes/inventoryRoutes'));
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
