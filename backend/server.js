@@ -13,6 +13,8 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/products', require('./routes/productRoutes'));
 app.use('/api/inventory', require('./routes/inventoryRoutes'));
+app.use('/api/suppliers', require('./routes/supplierRoutes'));
+app.use('/api/warehouses', require('./routes/warehouseRoutes'));
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
