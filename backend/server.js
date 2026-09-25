@@ -15,6 +15,8 @@ app.use('/api/products', require('./routes/productRoutes'));
 app.use('/api/inventory', require('./routes/inventoryRoutes'));
 app.use('/api/suppliers', require('./routes/supplierRoutes'));
 app.use('/api/warehouses', require('./routes/warehouseRoutes'));
+app.use('/api/shipments', require('./routes/shipmentRoutes'));
+app.use('/api/blockchain', require('./routes/blockchainRoutes'));
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
