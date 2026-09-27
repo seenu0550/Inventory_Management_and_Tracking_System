@@ -17,6 +17,8 @@ app.use('/api/suppliers', require('./routes/supplierRoutes'));
 app.use('/api/warehouses', require('./routes/warehouseRoutes'));
 app.use('/api/shipments', require('./routes/shipmentRoutes'));
 app.use('/api/blockchain', require('./routes/blockchainRoutes'));
+app.use('/api/qr', require('./routes/qrRoutes'));
+app.use('/api/tracking', require('./routes/trackingRoutes'));
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
