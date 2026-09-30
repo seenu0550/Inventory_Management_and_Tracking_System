@@ -19,6 +19,11 @@ app.use('/api/shipments', require('./routes/shipmentRoutes'));
 app.use('/api/blockchain', require('./routes/blockchainRoutes'));
 app.use('/api/qr', require('./routes/qrRoutes'));
 app.use('/api/tracking', require('./routes/trackingRoutes'));
+app.use('/api/tamper', require('./routes/tamperRoutes'));
+app.use('/api/transfers', require('./routes/transferRoutes'));
+app.use('/api/notifications', require('./routes/notificationRoutes'));
+app.use('/api/dashboard', require('./routes/dashboardRoutes'));
+app.use('/api/reports', require('./routes/reportRoutes'));
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
