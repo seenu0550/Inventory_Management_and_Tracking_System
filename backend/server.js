@@ -1,16 +1,26 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
+const mongoSanitize = require('express-mongo-sanitize');
+const xss = require('xss-clean');
 const connectDB = require('./config/db');
+const { apiLimiter, authLimiter } = require('./middleware/rateLimiter');
 
 const app = express();
 
 connectDB();
 
+// Security middleware
+app.use(helmet());
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '10kb' }));
+app.use(mongoSanitize());
+app.use(xss());
+app.use('/api', apiLimiter);
 
-app.use('/api/auth', require('./routes/authRoutes'));
+// Routes
+app.use('/api/auth', authLimiter, require('./routes/authRoutes'));
 app.use('/api/products', require('./routes/productRoutes'));
 app.use('/api/inventory', require('./routes/inventoryRoutes'));
 app.use('/api/suppliers', require('./routes/supplierRoutes'));
@@ -24,6 +34,8 @@ app.use('/api/transfers', require('./routes/transferRoutes'));
 app.use('/api/notifications', require('./routes/notificationRoutes'));
 app.use('/api/dashboard', require('./routes/dashboardRoutes'));
 app.use('/api/reports', require('./routes/reportRoutes'));
+app.use('/api/audit', require('./routes/auditRoutes'));
+app.use('/api/admin', require('./routes/adminRoutes'));
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
